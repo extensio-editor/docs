@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && shx mv dist/index.html dist/200.html",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -13,6 +13,7 @@
     "cssnano": "^6.1.0",
     "postcss": "^8",
     "register-service-worker": "^1.7.2",
+    "shx": "^0.3.4",
     "tailwindcss": "^3",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
