@@ -1,6 +1,6 @@
 import DocView from "@/views/DocView.vue";
 import SearchResultsView from "@/views/SearchResultsView.vue";
-import { createMemoryHistory, createRouter, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createMemoryHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes,
 });
 

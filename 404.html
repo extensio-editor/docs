@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not found</title>
+</head>
+<body>
+    <noscript>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+        <div class="container">
+            <h1>404</h1>
+            <h1>The page you requested could not be found</h1>
+            <h3>Try adding a # to the start of the url. <br>i.e. docs.extensio.xyz/search becomes docs.extensio.xyz/#/search</h3>
+        </div>
+        <style>
+            body {
+                background-color: #302f3d;
+                color: #c1c0c9;
+                padding: 0;
+                margin: 0;
+                font-family: "Inter", sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .container {
+                margin: 0;
+                display: flex;
+                width: 100vw;
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                text-align: center;
+            }
+        </style>
+    </noscript>
+
+    <script>
+        if (!window.location.pathname.startsWith("/#/")) {
+            console.log("redirecting to hash router...");
+            const newPathName = "/#" + window.location.pathname;
+            window.location.href = location.href.replace(window.location.pathname, newPathName)
+        }
+    </script>
+</body>
+</html>
