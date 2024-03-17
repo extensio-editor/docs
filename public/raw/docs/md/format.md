@@ -11,7 +11,7 @@ Headings using the equal and minus signs are not a thing.
 
 Underscores can not be used for **bold** text or *italic* text.
 
-## Block quotes (Block quotes)
+## Notes (Block quotes)
 
 Block quotes are replaced with notes, essentially the same just a diffrent name.
 
