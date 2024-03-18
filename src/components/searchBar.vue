@@ -1,11 +1,21 @@
 <template>
-  <input
-    type="text"
-    placeholder="Search"
-    class="w-full p-3 rounded-lg bg-backgroundAccent"
-    @keyup.self.enter="initializeSearch"
-    id="searchBar"
-  />
+  <div
+    class="flex flex-col space-y-5 sm:flex-row sm:space-x-5 sm:justify-center"
+  >
+    <input
+      type="text"
+      placeholder="Search"
+      class="w-full h p-3 rounded-lg bg-backgroundAccent"
+      @keyup.self.enter="initializeSearch"
+      id="searchBar"
+    />
+    <div
+      class="w-full text-center text-backgroundAccent bg-foreground rounded-lg p-3 cursor-pointer sm:w-1/6 sm:!mt-0"
+      @click="initializeSearch"
+    >
+      Go
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
