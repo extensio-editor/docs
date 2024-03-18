@@ -107,9 +107,9 @@ export default defineComponent({
         // eslint-disable-next-line
         const index = link.index! + indexOffset;
         const originalLength = link[0].length;
-        tmp.splice(index, originalLength - 1);
+        tmp.splice(index + 1, originalLength - 1);
         console.log(href);
-        tmp[index] = `&nbsp;<a ${
+        tmp[index] = `<a ${
           href.includes("https://docs.extensio.xyz/") || href.startsWith("/")
             ? "target=_top"
             : 'target="_blank"'
@@ -128,7 +128,7 @@ export default defineComponent({
         // eslint-disable-next-line
         const index = image.index! + indexOffset;
         const originalLength = image[0].length;
-        tmp.splice(index, originalLength - 1);
+        tmp.splice(index + 1, originalLength - 1);
         console.log(href);
         tmp[
           index
