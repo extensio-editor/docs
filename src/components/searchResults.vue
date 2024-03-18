@@ -2,7 +2,7 @@
   <div v-if="JSON.stringify(results) === '[]'">
     <h1>Searching...</h1>
   </div>
-  <div class="flex flex-col" v-if="JSON.stringify(results) !== '[]'">
+  <div class="flex flex-col space-y-5" v-if="JSON.stringify(results) !== '[]'">
     <div
       v-for="result in results"
       :key="result.name"

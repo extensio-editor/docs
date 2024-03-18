@@ -4,5 +4,29 @@
             "name": "Mardown Formatting Guide",
             "path": "/docs/md/format"
         }]
+    },
+    "extension_repo": {
+        "dev": {
+            "items": [{
+                "name": "Developer information for writing extensions",
+                "path": "/ext/dev"
+            }, {
+                "name": "Registering extensions to the repository",
+                "path": "/ext/dev/register"
+            }]
+        },
+        "repo": {
+            "items": [{
+                "name": "Information about the extension repository",
+                "path": "/ext/repo"
+            }]
+        },
+        "items": [{
+            "name": "Extension Repository Docs",
+            "path": "/ext/"
+        },{
+            "name": "Installing extensions",
+            "path": "/ext/installing"
+        }]
     }
 }
