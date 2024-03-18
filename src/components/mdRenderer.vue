@@ -107,9 +107,10 @@ export default defineComponent({
         // eslint-disable-next-line
         const index = link.index! + indexOffset;
         const originalLength = link[0].length;
-        tmp.splice(index + 1, originalLength - 1);
+        const prevChar = tmp[index];
+        tmp.splice(index, originalLength - 1);
         console.log(href);
-        tmp[index] = `<a ${
+        tmp[index] = `${prevChar}<a ${
           href.includes("https://docs.extensio.xyz/") || href.startsWith("/")
             ? "target=_top"
             : 'target="_blank"'
