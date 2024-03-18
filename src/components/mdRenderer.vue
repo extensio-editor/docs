@@ -132,7 +132,7 @@ export default defineComponent({
         console.log(href);
         tmp[
           index
-        ] = `<img class="w-full lg:w-1/3" alt="${altText}" src=${href} />`;
+        ] = `<img class="w-full lg:w-1/3 rounded-lg" alt="${altText}" src=${href} />`;
         indexOffset -= originalLength - 1;
       }
       parsedData = tmp.join("");
