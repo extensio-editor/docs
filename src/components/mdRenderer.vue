@@ -104,10 +104,16 @@ export default defineComponent({
       for (const link of links) {
         const altText = link[1];
         const href = link[2];
+        // eslint-disable-next-line
         const index = link.index! + indexOffset;
         const originalLength = link[0].length;
         tmp.splice(index, originalLength - 1);
-        tmp[index] = `<a class="underline" href=${href}>${altText}</a>`;
+        console.log(href);
+        tmp[index] = `&nbsp;<a ${
+          href.includes("https://docs.extensio.xyz/") || href.startsWith("/")
+            ? "target=_top"
+            : 'target="_blank"'
+        } class="underline" href=${href}>${altText}</a>`;
         indexOffset -= originalLength - 1;
       }
       parsedData = tmp.join("");
