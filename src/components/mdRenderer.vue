@@ -75,6 +75,28 @@ export default defineComponent({
       }
       parsedData = charArr.join("");
 
+      // Notes (block quotes but shh)
+      let tmp = parsedData.split("<br />");
+      for (let i = 0; i < tmp.length; i++) {
+        const line = tmp[i];
+        if (line.startsWith(">")) {
+          const note = line.split("[~newline~]");
+          for (let j = 0; j < note.length; j++) {
+            note[j].startsWith("> ")
+              ? (note[j] = note[j].slice(2, note[j].length))
+              : note[j].slice(1, note[j].length);
+
+            if (j == 0) note[j] = `<b>${note[j]}</b>`;
+          }
+          tmp[
+            i
+          ] = `<div class="w-fit p-3 border-l-backgroundAccent border-l-8 bg-backgroundAccent/[.3] rounded-lg">${note.join(
+            "<br />"
+          )}</div>`;
+        }
+      }
+      parsedData = tmp.join("<br />");
+
       return parsedData;
     },
   },
