@@ -118,6 +118,25 @@ export default defineComponent({
       }
       parsedData = tmp.join("");
 
+      // Images
+      const images = parsedData.matchAll(/!\[([^\]]*)\]\(([^)]*)\)/g);
+      indexOffset = 0;
+      tmp = parsedData.split("");
+      for (const image of images) {
+        const altText = image[1];
+        const href = image[2];
+        // eslint-disable-next-line
+        const index = image.index! + indexOffset;
+        const originalLength = image[0].length;
+        tmp.splice(index, originalLength - 1);
+        console.log(href);
+        tmp[
+          index
+        ] = `<img class="w-full lg:w-1/3" alt="${altText}" src=${href} />`;
+        indexOffset -= originalLength - 1;
+      }
+      parsedData = tmp.join("");
+
       return parsedData;
     },
   },
