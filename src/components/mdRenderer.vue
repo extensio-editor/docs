@@ -109,7 +109,6 @@ export default defineComponent({
         const originalLength = link[0].length;
         const prevChar = tmp[index];
         tmp.splice(index, originalLength - 1);
-        console.log(href);
         tmp[index] = `${prevChar}<a ${
           href.includes("https://docs.extensio.xyz/") || href.startsWith("/")
             ? "target=_top"
@@ -130,7 +129,6 @@ export default defineComponent({
         const index = image.index! + indexOffset;
         const originalLength = image[0].length;
         tmp.splice(index + 1, originalLength - 1);
-        console.log(href);
         tmp[
           index
         ] = `<img class="w-full lg:w-1/3 rounded-lg" alt="${altText}" src=${href} />`;
