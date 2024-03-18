@@ -23,7 +23,7 @@
         },
         "items": [{
             "name": "Extension Repository Docs",
-            "path": "/ext/"
+            "path": "/ext"
         },{
             "name": "Installing extensions",
             "path": "/ext/installing"

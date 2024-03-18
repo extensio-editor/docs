@@ -97,6 +97,21 @@ export default defineComponent({
       }
       parsedData = tmp.join("<br />");
 
+      // Links
+      const links = parsedData.matchAll(/[^!]\[([^\]]*)\]\(([^)]*)\)/g);
+      let indexOffset = 0;
+      tmp = parsedData.split("");
+      for (const link of links) {
+        const altText = link[1];
+        const href = link[2];
+        const index = link.index! + indexOffset;
+        const originalLength = link[0].length;
+        tmp.splice(index, originalLength - 1);
+        tmp[index] = `<a class="underline" href=${href}>${altText}</a>`;
+        indexOffset -= originalLength - 1;
+      }
+      parsedData = tmp.join("");
+
       return parsedData;
     },
   },
