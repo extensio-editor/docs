@@ -4,6 +4,7 @@
 
 <script lang="tsx">
 import { defineComponent } from "vue";
+import sytaxHighlight from "@extensio/html-syntax-highlighting";
 
 export default defineComponent({
   name: "mdRenderer",
@@ -97,9 +98,37 @@ export default defineComponent({
       }
       parsedData = tmp.join("<br />");
 
+      // Code blocks
+      const codeBlocks = parsedData.matchAll(
+        /```(.*?)\[~newline~\](.*?)\[~newline~\]```/gs
+      );
+      let indexOffset = 0;
+      tmp = parsedData.split("");
+      for (const block of codeBlocks) {
+        console.log(block);
+        const code = block[2]
+          .replaceAll("<br />", "\n")
+          .replaceAll("[~newline~]", "\n");
+        const language = block[1];
+        const highlighted = sytaxHighlight(code, {
+          language: language,
+          useBreaks: true,
+        });
+        const index = block.index! + indexOffset;
+        const originalLength = block[0].length;
+        const prevChar = tmp[index];
+        tmp.splice(index, originalLength - 1);
+        tmp[index] = `${prevChar}<div class="code">${highlighted}</div>`;
+      }
+      parsedData = tmp.join("");
+
+      // Inline code
+      const code = parsedData.matchAll(/`(.*?)`/g);
+      // TODO: Put the code in <code> tags.
+
       // Links
       const links = parsedData.matchAll(/[^!]\[([^\]]*)\]\(([^)]*)\)/g);
-      let indexOffset = 0;
+      indexOffset = 0;
       tmp = parsedData.split("");
       for (const link of links) {
         const altText = link[1];
