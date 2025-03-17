@@ -4,7 +4,7 @@
 
 <script lang="tsx">
 import { defineComponent } from "vue";
-import sytaxHighlight from "@extensio/html-syntax-highlighting";
+import syntaxHighlight from "@extensio/html-syntax-highlighting";
 
 export default defineComponent({
   name: "mdRenderer",
@@ -97,30 +97,27 @@ export default defineComponent({
         }
       }
       parsedData = tmp.join("<br />");
-
       // Code blocks
-      const codeBlocks = parsedData.matchAll(
-        /```(.*?)\[~newline~\](.*?)\[~newline~\]```/gs
-      );
-      let indexOffset = 0;
-      tmp = parsedData.split("");
-      for (const block of codeBlocks) {
-        console.log(block);
-        const code = block[2]
+
+      const codeBlocks = [
+        ...parsedData.matchAll(/```(.*?)\[~newline~\](.*?)\[~newline~\]```/gs),
+      ];
+
+      let tmp_ = parsedData;
+      for (const codeBlock of codeBlocks) {
+        const code = codeBlock[2]
           .replaceAll("<br />", "\n")
           .replaceAll("[~newline~]", "\n");
-        const language = block[1];
-        const highlighted = sytaxHighlight(code, {
-          language: language,
+
+        const highlighted = `<div class="code">${syntaxHighlight(code, {
+          language: codeBlock[1],
           useBreaks: true,
-        });
-        const index = block.index! + indexOffset;
-        const originalLength = block[0].length;
-        const prevChar = tmp[index];
-        tmp.splice(index, originalLength - 1);
-        tmp[index] = `${prevChar}<div class="code">${highlighted}</div>`;
+        })}</div>`;
+
+        tmp_ = tmp_.replace(codeBlock[0], highlighted);
       }
-      parsedData = tmp.join("");
+
+      parsedData = tmp_;
 
       // Inline code
       const code = parsedData.matchAll(/`(.*?)`/g);
@@ -128,7 +125,7 @@ export default defineComponent({
 
       // Links
       const links = parsedData.matchAll(/[^!]\[([^\]]*)\]\(([^)]*)\)/g);
-      indexOffset = 0;
+      let indexOffset = 0;
       tmp = parsedData.split("");
       for (const link of links) {
         const altText = link[1];
