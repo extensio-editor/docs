@@ -4,6 +4,7 @@
 
 <script lang="tsx">
 import { defineComponent } from "vue";
+import syntaxHighlight from "@extensio/html-syntax-highlighting";
 
 export default defineComponent({
   name: "mdRenderer",
@@ -97,6 +98,68 @@ export default defineComponent({
       }
       parsedData = tmp.join("<br />");
 
+      // Code blocks
+      const codeBlocks = [
+        ...parsedData.matchAll(/```(.*?)\[~newline~\](.*?)\[~newline~\]```/gs),
+      ];
+
+      let tmp_ = parsedData;
+      let temp = parsedData;
+      for (const codeBlock of codeBlocks) {
+        const code = codeBlock[2]
+          .replaceAll("<br />", "\n")
+          .replaceAll("[~newline~]", "\n");
+
+        const id =
+          Date.now().toString(36) + Math.random().toString(36).substr(2);
+
+        let highlighted = `<div class="code" id="${id}"><span class="linenr">1&nbsp</span>&nbsp${syntaxHighlight(
+          code,
+          {
+            language: codeBlock[1],
+            useBreaks: true,
+          }
+        )}</div>`;
+
+        let i = 1;
+        const getLineNumber = () => {
+          i = i + 1;
+          return i;
+        };
+
+        highlighted = highlighted.replaceAll(
+          "<br>",
+          () => `<br><span class="linenr">${getLineNumber()}&nbsp;</span>&nbsp`
+        );
+
+        tmp_ = tmp_.replace(codeBlock[0], highlighted);
+
+        const items = document.createElement("div");
+        items.innerHTML = tmp_;
+        const lineNrItems = items
+          .querySelector(`#${id}`)!
+          .querySelectorAll(".linenr");
+        const lastItemLength = (
+          lineNrItems[lineNrItems.length - 1] as HTMLSpanElement
+        ).innerText.length;
+
+        lineNrItems.forEach((lineNrItem) => {
+          lineNrItem.innerHTML = `${(
+            lineNrItem as HTMLSpanElement
+          ).innerText.padStart(lastItemLength, "0")}&nbsp;`;
+        });
+
+        temp = items.innerHTML.toString();
+      }
+
+      parsedData = temp;
+
+      // Inline code
+      const code = [...parsedData.matchAll(/`(.*?)`/g)];
+      code.forEach((item) => {
+        parsedData = parsedData.replace(item[0], `<code>${item[1]}</code>`);
+      });
+
       // Links
       const links = parsedData.matchAll(/[^!]\[([^\]]*)\]\(([^)]*)\)/g);
       let indexOffset = 0;
@@ -147,5 +210,22 @@ export default defineComponent({
 <style>
 #doc {
   white-space: pre-line;
+}
+
+.code code {
+  all: inherit;
+}
+
+.code {
+  font-family: monospace;
+  background-color: #2a1f31;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.linenr {
+  border-right: 1px grey solid;
+  height: 100%;
+  user-select: none;
 }
 </style>

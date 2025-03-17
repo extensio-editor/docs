@@ -34,6 +34,18 @@ h6 {
   font-weight: normal !important;
   font-size: medium !important;
 }
+
+code {
+  background-color: #2a1f31;
+  padding: 3px;
+  padding-bottom: 1px;
+  padding-top: 1px;
+  border-radius: 5px;
+}
+
+.code {
+  white-space: pre-wrap;
+}
 </style>
 
 <script lang="ts">

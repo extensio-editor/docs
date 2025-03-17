@@ -1063,6 +1063,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@extensio/html-syntax-highlighting@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@extensio/html-syntax-highlighting/-/html-syntax-highlighting-1.2.1.tgz#4c5b17063bb6483f561570ffe949d64eb61fb677"
+  integrity sha512-heLWha96s/eVOXewA2awOs/VcbjjbAGPinh1/RpE7ZuwYklaBcAIGKQBdnkmhUzIepvoPlTzeKZ6hiysRRZ5Gw==
+
 "@hapi/hoek@^9.0.0", "@hapi/hoek@^9.3.0":
   version "9.3.0"
   resolved "https://registry.npmjs.org/@hapi/hoek/-/hoek-9.3.0.tgz"
