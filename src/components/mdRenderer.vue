@@ -165,8 +165,16 @@ export default defineComponent({
       }
       parsedData = tmp.join("");
 
+      parsedData = parsedData.split("[~newline~]").join("\n");
+
       return parsedData;
     },
   },
 });
 </script>
+
+<style>
+#doc {
+  white-space: pre-line;
+}
+</style>
